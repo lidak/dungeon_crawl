@@ -22,7 +22,7 @@ impl MapBuilder {
                 rng.range(2, 10)
             );
             let mut overlap = false;
-            for r in self.room.iter() {
+            for r in self.rooms.iter() {
                 if r.intersect(&room) {
                     overlap = true;
                 }
@@ -31,7 +31,7 @@ impl MapBuilder {
             if !overlap {
                 room.for_each(|p| {
                     if p.x > 0 && p.x < SCREEN_WIDTH && p.y > 0 && p.y < SCREEN_HEIGHT {
-                        let idx = map_idx(p.x, p.y);
+                        let idx = get_map_index_from_coords(p.x, p.y);
                         self.map.tiles[idx] = TileType::Floor;
                     }
                 });
